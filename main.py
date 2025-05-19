@@ -8,7 +8,7 @@ def main():
     df = process_data(raw_data)
     save_to_csv(df)
     # Change this line to match your actual JSON key file name
-    save_to_google_sheets(df, json_keyfile='project-etl-460308-82133f2ce43f.json(1)')
+    save_to_google_sheets(df, json_keyfile='project-etl-460308-82133f2ce43f.json')
 
 if __name__ == "__main__":
     main()
