@@ -7,7 +7,7 @@ def main():
     raw_data = fetch_products(pages=50)
     df = process_data(raw_data)
     save_to_csv(df)
-    save_to_google_sheets(df, json_keyfile='project-etl-460308-82133f2ce43f')
+    save_to_google_sheets(df, json_keyfile='etl-fashion-data-ee489a18d56a.json')
 
 if __name__ == "__main__":
     main()
