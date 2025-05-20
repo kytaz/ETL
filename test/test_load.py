@@ -1,11 +1,11 @@
 import pytest
 import pandas as pd
 from unittest.mock import patch, MagicMock
-from utils import load as load  # ✅ perbaikan utama
+from utils import load as load 
 
 def test_save_csv(tmp_path):
     df = pd.DataFrame({'a': [1, 2], 'b': [3, 4]})
-    filename = tmp_path / "test_output.csv"  # pakai direktori sementara
+    filename = tmp_path / "test_output.csv"  
     load.save_to_csv(df, filename)
     # Cek file dibuat dan isinya
     df_loaded = pd.read_csv(filename)
