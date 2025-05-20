@@ -8,7 +8,8 @@ def main():
     print("✅ Data berhasil ditransformasi. Kolom:", df.columns.tolist())
     print("🧾 Contoh data:\n", df.head())
     save_to_csv(df)
-    save_to_google_sheets(df, json_keyfile='project-etl-460308-464de4f7c024.json')
+    save_to_google_sheets(df, json_keyfile='/content/project-etl-460308-464de4f7c024.json')
+    
 
 if __name__ == "__main__":
     main()
