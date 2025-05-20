@@ -1,5 +1,5 @@
 import pytest
-from utils import utils_extract as extract
+from utils import extract as extract
 from datetime import datetime
 
 class DummyResponse:
