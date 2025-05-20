@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 from unittest.mock import patch, MagicMock
-from utils import utils_load as load  # ✅ perbaikan utama
+from utils import load as load  # ✅ perbaikan utama
 
 def test_save_csv(tmp_path):
     df = pd.DataFrame({'a': [1, 2], 'b': [3, 4]})
