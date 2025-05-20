@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from utils.utils_transform import transform as transform_data
+from utils.transform import transform as transform_data
 
 def test_transform_data():
     # Hindari 'N/A' atau None agar transformasi sukses
