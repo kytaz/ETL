@@ -37,10 +37,6 @@ Setelah cloned, upload semua berkas dan folder ke repositori tersebut
 # Pindah ke direktori /content
 %cd /content
 
-# Clone repo GitHub
-!git clone https://github.com/Mirandasigalingging/ETL.git /content/ETL
-%cd /content/ETL
-
 # Hapus folder ETL jika sudah ada
 %rm -rf ETL
 
