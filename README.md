@@ -1,1 +1,85 @@
 # ETL
+## Tahapan menjalankan Membangun ETL Pipeline Sederhana
+### 1. Membuat Struktur Folder dan Berkas
+Pertama, buat struktur folder dan berkas sesuai berikut:
+```
+ETL/
+├── tests
+│   ├── test_extract.py
+│   ├── test_transform.py
+│   └── test_load.py
+├── utils
+│   ├── extract.py
+│   ├── transform.py
+│   └── load.py
+├── main.py
+├── requirements.txt
+└── google-sheets-api.json
+```
+
+Penjelasan:
+
+- test/ berisi script testing untuk bagian extract, transform, load.
+- utils/ berisi script fungsi untuk setiap tahap ETL.
+- main.py adalah script utama yang menjalankan proses ETL secara keseluruhan.
+- requirements.txt berisi daftar dependencies yang diperlukan.
+- google-sheets-api.json adalah credential JSON untuk akses Google Sheets API.
+
+### 2. Membuat Repository GitHub dan Upload Berkas
+Buat repository baru di GitHub, misalnya: ETL.
+Clone repo ke lokal atau langsung dari Google Colab:
+```
+!git clone https://github.com/username/ETL.git
+```
+
+Setelah cloned, upload semua berkas dan folder ke repositori tersebut
+
+### 3. Menjalankan ETL dari Google Colab
+
+### Pindah ke direktori /content
+```
+%cd /content
+```
+
+#### Hapus folder ETL jika sudah ada
+```
+%rm -rf ETL
+```
+
+### Kloning repositori GitHub
+```
+!git clone https://github.com/kytaz/ETL.git
+```
+
+### Verifikasi bahwa folder ETL sudah terkloning
+```
+%ls ETL
+```
+
+### Masuk ke direktori ETL
+```
+%cd ETL
+```
+
+### Install dependencies
+```
+!pip install -r requirements.txt
+```
+
+### Jalankan ETL pipeline
+``` 
+!python main.py
+```
+
+### Jalankan unit test dengan coverage
+```
+!coverage run -m pytest test
+!coverage report
+```
+
+
+### 4.  Link Google Sheets
+Setelah proses selesai, data hasil ETL bisa dikirim ke Google Sheets yang di-share melalui link berikut:
+```
+ https://docs.google.com/spreadsheets/d/1Vy4rViij8jDSrV6JoEEz0Whcl-QVN8X3l0_lMlYM85A/edit?gid=0#gid=0
+```
