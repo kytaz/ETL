@@ -1,25 +1,34 @@
+import re
 import pandas as pd
+import numpy as np
 
-def transform_data(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Melakukan transformasi data seperti konversi harga dan pembersihan.
-    """
-    # Mengonversi harga ke dalam Rupiah
-    df['Price'] = df['Price'].replace({'Rp': '', '.': ''}, regex=True).astype(int) * 16000
+EXCHANGE_RATE = 16000
 
-    # Mengonversi rating menjadi float
-    df['Rating'] = df['Rating'].replace({'Invalid Rating': '0', '/5': '', ' ': ''}, regex=True).astype(float)
+def transform(data: list[dict]) -> pd.DataFrame:
+    try:
+        df = pd.DataFrame(data)
+    except Exception as e:
+        print(f"[ERROR] Gagal membuat DataFrame: {e}")
+        return pd.DataFrame()
 
-    # Menghapus data yang tidak valid
-    df = df[df['Title'] != 'Unknown Product']
-    df = df.drop_duplicates()
-    df = df.dropna()
-
-    # Kolom 'Size' dan 'Gender' tidak mengandung teks tambahan
-    df['Size'] = df['Size'].replace({'Size: ': ''}, regex=True)
-    df['Gender'] = df['Gender'].replace({'Gender: ': ''}, regex=True)
-
-    # Menambahkan kolom timestamp
-    df['Timestamp'] = pd.to_datetime('now')
+    try:
+        df = df[~df["price"].str.contains("Unavailable", na=False)]
+        df["price"] = df["price"].str.replace("[$,]", "", regex=True).astype(float) * EXCHANGE_RATE
+        df["rating"] = df["rating"].str.replace(",", ".").str.extract(r"([\d.]+)").astype(float)
+        df["colors"] = df["colors"].str.extract(r"(\d+)").astype(float).astype("Int64")
+        df["size"] = df["size"].str.replace("Size:", "").str.strip()
+        df["gender"] = df["gender"].str.replace("Gender:", "").str.strip()
+        df = df.dropna(subset=["title", "price", "rating", "colors", "size", "gender", "timestamp"])
+        df = df[~df["title"].isin(["Unknown Product", "Pants"])]
+        for col in ["price", "rating", "colors"]:
+            df[col] = df[col].replace(0, np.nan)
+        df = df.dropna(subset=["price", "rating", "colors"])
+        df = df[df["rating"].between(1.0, 5.0)]
+        df = df.drop_duplicates()
+        if "image_url" in df.columns:
+            df = df.drop(columns=["image_url"])
+    except Exception as e:
+        print(f"[ERROR] Terjadi kesalahan saat transformasi data: {e}")
+        return pd.DataFrame()
 
     return df
