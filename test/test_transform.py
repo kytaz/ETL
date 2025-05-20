@@ -3,7 +3,7 @@ import pandas as pd
 from utils.transform import transform as transform_data
 
 def test_transform_data():
-    # Hindari 'N/A' atau None agar transformasi sukses
+   
     data = {
         'price': ['$100', '$200', '$150', '$50'],
         'rating': ['⭐ 4.5 / 5', '⭐ 3.8 / 5', '⭐ 4.2 / 5', '⭐ 5.0 / 5'],
@@ -49,5 +49,5 @@ def test_transform_filter_invalid_price_and_rating():
         }
     ]
     df = transform_data(raw_data)
-    # Produk "Unknown Product", "Pants", rating 0 dan harga 0 akan terfilter
+   
     assert df.empty
