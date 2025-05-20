@@ -8,7 +8,7 @@ def save_to_csv(df, filename='products.csv'):
     except Exception as e:
         print(f"[ERROR] Gagal menyimpan ke CSV: {e}")
 
-def save_to_google_sheets(df, json_keyfile='project-etl-460308-8ae7b5cb6416.json', sheet_url='https://docs.google.com/spreadsheets/d/1D2k3gybmOADPQOeXZfOi_xnLNaLrkA1fErpLVoGteLU/edit?usp=sharing'):
+def save_to_google_sheets(df, json_keyfile='project-etl-460308-8ae7b5cb6416.json', sheet_url='https://docs.google.com/spreadsheets/d/1D2k3gybmOADPQOeXZfOi_xnLNaLrkA1fErpLVoGteLU'):
     try:
         gc = gspread.service_account(filename=json_keyfile)
         sh = gc.open_by_url(sheet_url)
